@@ -86,5 +86,30 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+
+// Se você seguiu esta seção até agora, o seguinte deve ser o fluxo para aplicar danos a um ator:
+// Um ator ou função externa chama CauseDamagenosso personagem, que por sua vez chama sua TakeDamagefunção.
+// TakeDamagechamadas SetCurrentHealthpara alterar o valor de integridade atual do jogador no servidor.
+// SetCurrentHealthchama OnHealthUpdateo servidor, causando a execução de qualquer funcionalidade que ocorra em resposta a alterações na saúde do jogador.
+// CurrentHealth replica nas cópias do Personagem de todos os clientes conectados.
+// Quando cada cliente recebe um novo CurrentHealthvalor do servidor, eles chamam OnRep_CurrentHealth.
+// OnRep_CurrentHealthchamadas OnHealthUpdate, garantindo que cada cliente responda da mesma maneira ao novo CurrentHealthvalor.
+
+	/** Getter for Max Health. */
+	UFUNCTION(BlueprintPure, Category="Health")
+	FORCEINLINE float GetMaxHealth() const { return MaxHealth; }
+
+	/** Getterfor Current Health. */
+	UFUNCTION(BlueprintPure, Category="Health")
+	FORCEINLINE float GetCurrentHealth() const { return CurrentHealth; }
+
+	/** Setter for Current Health. Clamps the value between 0 and Max Health and calls OnHealthUpdate. Should only be called on the server*/
+	UFUNCTION(BlueprintCallable, Category= "Health")
+	void SetCurrentHealth(float healthValue);
+
+	/** Event for taking damage. Overridden from APawn. */
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	float TakeDamage(float DamageTaken, struct FDamageEvent const& DamageEvent,AController* EventInstigator,AActor* DamageCause) override;
 };
 

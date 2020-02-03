@@ -181,3 +181,19 @@ void AThirdPersonMPCharacter::OnRep_CurrentHealth()
 {
 	OnHealthUpdate();
 }
+
+void AThirdPersonMPCharacter::SetCurrentHealth(float healthValue)
+{
+	if(Role == ROLE_Authority)
+	{
+		CurrentHealth = FMath::Clamp(healthValue,0.f,MaxHealth);
+		OnHealthUpdate();
+	}
+}
+
+float AThirdPersonMPCharacter::TakeDamage(float DamageTaken, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamagetCauser)
+{
+	float damageApplied = CurrentHealth - DamageTaken;
+	SetCurrentHealth(damageApplied);
+	return damageApplied;
+}
