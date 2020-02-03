@@ -8,6 +8,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Net/UnrealNetwork.h"
+#include "Engine/Engine.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AThirdPersonMPCharacter
@@ -45,6 +47,10 @@ AThirdPersonMPCharacter::AThirdPersonMPCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+
+	// Initialize the player's Health
+	MaxHealth = 100;
+	CurrentHealth = MaxHealth;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -131,4 +137,47 @@ void AThirdPersonMPCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// Replicated Properties
+void AThirdPersonMPCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	//Replicate current health
+	DOREPLIFETIME(AThirdPersonMPCharacter,CurrentHealth);
+}
+
+void AThirdPersonMPCharacter::OnHealthUpdate()
+{
+	// Client-specific funcionality
+	if(IsLocallyControlled())
+	{
+		FString healthMessage = FString::Printf(TEXT("You have %f health remaining."), CurrentHealth);
+		GEngine->AddOnScreenDebugMessage(-1,5.f,FColor::Blue,healthMessage);
+		if(CurrentHealth <=  0)
+		{
+			FString deathMessage = FString::Printf(TEXT("You have been killed."));
+			GEngine->AddOnScreenDebugMessage(-1,5.f,FColor::Red,deathMessage);
+		}
+	}
+
+	// Server-specific funcionality
+	if(Role == ROLE_Authority)
+	{
+		FString healthMessage = FString::Printf(TEXT("%s now has %f	health remaining."),*GetFName().ToString(), CurrentHealth);
+		GEngine->AddOnScreenDebugMessage(-1,5.f,FColor::Blue, healthMessage);
+	}
+
+	// Functions that occur on all machines.
+	/*
+		Any special funcionality that should occur as a result of damage or death should be place here.
+	*/
+}
+
+void AThirdPersonMPCharacter::OnRep_CurrentHealth()
+{
+	OnHealthUpdate();
 }

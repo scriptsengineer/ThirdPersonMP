@@ -21,6 +21,9 @@ class AThirdPersonMPCharacter : public ACharacter
 public:
 	AThirdPersonMPCharacter();
 
+	/** Property replication **/
+	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -30,6 +33,21 @@ public:
 	float BaseLookUpRate;
 
 protected:
+
+	/** The player's maximum health. This is highest that their health can be, and the value that their health starts at when spawned.*/
+	UPROPERTY(EditDefaultsOnly, Category="Health")
+	float MaxHealth;
+
+	/** The player's current health. When reduced to 0,they are considered dead.**/
+	UPROPERTY(ReplicatedUsing=OnRep_CurrentHealth)
+	float CurrentHealth;
+
+	/** RepNotify for changes made to current health**/
+	UFUNCTION()
+	void OnRep_CurrentHealth();
+
+	/** Response to health being updated. Called on the server immediately after modification, and  on clients in response to a RepNotify **/
+	void OnHealthUpdate();
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();
