@@ -1,0 +1,128 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "ThirdPersonMP (Debug)",
+			"request": "launch",
+			"preLaunchTask": "ThirdPersonMP Win64 Debug Build",
+			"program": "E:\\UE4\\Tutorials\\Multiplayer\\ThirdPersonMP\\Binaries\\Win64\\ThirdPersonMP-Win64-Debug.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "ThirdPersonMP (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "ThirdPersonMP Win64 DebugGame Build",
+			"program": "E:\\UE4\\Tutorials\\Multiplayer\\ThirdPersonMP\\Binaries\\Win64\\ThirdPersonMP-Win64-DebugGame.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "ThirdPersonMP (Development)",
+			"request": "launch",
+			"preLaunchTask": "ThirdPersonMP Win64 Development Build",
+			"program": "E:\\UE4\\Tutorials\\Multiplayer\\ThirdPersonMP\\Binaries\\Win64\\ThirdPersonMP.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "ThirdPersonMP (Shipping)",
+			"request": "launch",
+			"preLaunchTask": "ThirdPersonMP Win64 Shipping Build",
+			"program": "E:\\UE4\\Tutorials\\Multiplayer\\ThirdPersonMP\\Binaries\\Win64\\ThirdPersonMP-Win64-Shipping.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "ThirdPersonMP (Test)",
+			"request": "launch",
+			"preLaunchTask": "ThirdPersonMP Win64 Test Build",
+			"program": "E:\\UE4\\Tutorials\\Multiplayer\\ThirdPersonMP\\Binaries\\Win64\\ThirdPersonMP-Win64-Test.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "ThirdPersonMPEditor (Debug)",
+			"request": "launch",
+			"preLaunchTask": "ThirdPersonMPEditor Win64 Debug Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Binaries\\Win64\\UE4Editor-Win64-Debug.exe",
+			"args": [
+				"E:\\UE4\\Tutorials\\Multiplayer\\ThirdPersonMP\\ThirdPersonMP.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "ThirdPersonMPEditor (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "ThirdPersonMPEditor Win64 DebugGame Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"E:\\UE4\\Tutorials\\Multiplayer\\ThirdPersonMP\\ThirdPersonMP.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "ThirdPersonMPEditor (Development)",
+			"request": "launch",
+			"preLaunchTask": "ThirdPersonMPEditor Win64 Development Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"E:\\UE4\\Tutorials\\Multiplayer\\ThirdPersonMP\\ThirdPersonMP.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Generate Project Files",
+			"type": "clr",
+			"request": "launch",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.22\\Engine\\Binaries\\DotNET\\UnrealBuildTool.exe",
+			"console": "externalTerminal",
+			"args": [
+				"-projectfiles",
+				"-vscode",
+				"-project=\"E:\\UE4\\Tutorials\\Multiplayer\\ThirdPersonMP\\ThirdPersonMP.uproject\"",
+				"-game",
+				"-engine"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.22"
+		}
+	]
+}

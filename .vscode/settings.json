@@ -1,0 +1,7 @@
+{
+	"files.exclude": {
+		"E:/UE4/Tutorials/Multiplayer/ThirdPersonMP/.vscode": true,
+		"E:/UE4/Tutorials/Multiplayer/ThirdPersonMP/Content": true,
+		"E:/UE4/Tutorials/Multiplayer/ThirdPersonMP/Intermediate": true
+	}
+}
