@@ -3,6 +3,15 @@
 Tutorial and learn Third Person in Multiplayer
 Source Docs: https://docs.unrealengine.com/en-US/Gameplay/Networking/QuickStart/index.html
 
+# Pattern on replicates system
+
+- An external Actor or function calls CauseDamage on our Character, which in turn calls its **TakeDamage** function.
+- **TakeDamage** calls **SetCurrentHealth** to change the player's Current Health value on the server.
+- **SetCurrentHealth** calls **OnHealthUpdate** on the server, causing any functionality that happens in response to changes in the player's health to execute.
+- **CurrentHealth** replicates to all connected clients' copies of the Character.
+- When each client receives a new **CurrentHealth** value from the server, they call **OnRep_CurrentHealth**.
+- **OnRep_CurrentHealth** calls **OnHealthUpdate**, ensuring that each client responds the same way to the new **CurrentHealth** value.
+
 ## Tips and Tricks
 
 ### Register another function to impact event.

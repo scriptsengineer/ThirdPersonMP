@@ -10,6 +10,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Engine/Engine.h"
+#include "ThirdPersonMPProjectile.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AThirdPersonMPCharacter
@@ -51,6 +52,12 @@ AThirdPersonMPCharacter::AThirdPersonMPCharacter()
 	// Initialize the player's Health
 	MaxHealth = 100;
 	CurrentHealth = MaxHealth;
+
+	// Initialize projectile class
+	ProjectileClass = AThirdPersonMPProjectile::StaticClass();
+	// Initialize Fire rate
+	FireRate = 0.25f;
+	bIsFiringWeapon = false;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -80,6 +87,9 @@ void AThirdPersonMPCharacter::SetupPlayerInputComponent(class UInputComponent* P
 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AThirdPersonMPCharacter::OnResetVR);
+
+	//handle firing projectiles
+	PlayerInputComponent->BindAction("Fire",IE_Pressed,this,&AThirdPersonMPCharacter::StartFire);
 }
 
 
@@ -195,4 +205,37 @@ float AThirdPersonMPCharacter::TakeDamage(float DamageTaken, struct FDamageEvent
 	float damageApplied = CurrentHealth - DamageTaken;
 	SetCurrentHealth(damageApplied);
 	return damageApplied;
+}
+
+void AThirdPersonMPCharacter::StartFire()
+{
+	if(!bIsFiringWeapon)
+	{
+		bIsFiringWeapon = true;
+		UWorld* World = GetWorld();
+		World->GetTimerManager().SetTimer(FiringTimer, this, &AThirdPersonMPCharacter::StopFire, FireRate, false);
+		HandleFire();
+	}
+}
+
+void AThirdPersonMPCharacter::StopFire()
+{
+	bIsFiringWeapon = false;
+}
+
+void AThirdPersonMPCharacter::HandleFire_Implementation()
+{
+	FVector spawnLocation = GetActorLocation() + ( GetControlRotation().Vector() * 100.0f) + (GetActorUpVector() * 50.0f);
+	FRotator spawnRotation = GetControlRotation();
+
+	FActorSpawnParameters spawnParams;
+	spawnParams.Instigator = Instigator;
+	spawnParams.Owner = this;
+
+	AThirdPersonMPProjectile* spawnProjectile = GetWorld()->SpawnActor<AThirdPersonMPProjectile>(spawnLocation, spawnRotation, spawnParams);
+}
+
+bool AThirdPersonMPCharacter::HandleFire_Validate()
+{
+	return true;
 }
