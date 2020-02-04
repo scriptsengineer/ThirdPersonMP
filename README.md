@@ -7,10 +7,12 @@ Source Docs: https://docs.unrealengine.com/en-US/Gameplay/Networking/QuickStart/
 
 # 1 Register another function to impact event.
 
-'''
-//Registering the Projectile Impact function on a Hit event.SphereComponent->OnComponentHit.AddDynamic(this, &AThirdPersonMPProjectile::OnProjectileImpact);
-'''
+```C++
+//Registering the Projectile Impact function on a Hit event.
+SphereComponent->OnComponentHit.AddDynamic(this, &AThirdPersonMPProjectile::OnProjectileImpact);
+```
+
 Note: Function need signature
-'''
+```C++
 OnProjectileImpact(UPrimitiveComponent* ,AActor* ,UPrimitiveComponent* , FVector , const FHitResult&)
-'''
+```
