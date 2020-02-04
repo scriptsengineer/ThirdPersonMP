@@ -19,6 +19,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION(Category="Projectile")
+	void OnProjectileImpact(UPrimitiveComponent* hitComponent,AActor* OtherActor, UPrimitiveComponent* OtherComponent,FVector NormalImpulse, const FHitResult& Hit);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -46,5 +49,7 @@ public:
 	// The damage delta by this projectile.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Damage")
 	float Damage;
+
+	virtual void Destroyed() override;
 
 };

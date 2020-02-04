@@ -139,7 +139,6 @@ void AThirdPersonMPCharacter::MoveRight(float Value)
 	}
 }
 
-
 /////////////////////////////////////////////////////////////////////////////////////////
 // Replicated Properties
 void AThirdPersonMPCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
