@@ -176,7 +176,7 @@ void AThirdPersonMPCharacter::OnHealthUpdate()
 	// Server-specific funcionality
 	if(Role == ROLE_Authority)
 	{
-		FString healthMessage = FString::Printf(TEXT("%s now has %f	health remaining."),*GetFName().ToString(), CurrentHealth);
+		FString healthMessage = FString::Printf(TEXT("SERVER %s now has %f	health remaining."),*GetFName().ToString(), CurrentHealth);
 		GEngine->AddOnScreenDebugMessage(-1,5.f,FColor::Blue, healthMessage);
 	}
 

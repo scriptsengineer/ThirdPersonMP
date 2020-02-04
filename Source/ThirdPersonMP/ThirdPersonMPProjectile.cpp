@@ -58,22 +58,18 @@ AThirdPersonMPProjectile::AThirdPersonMPProjectile()
 	// init component damage
 	DamageType = UDamageType::StaticClass();
 	Damage = 10.0f;
-	
-
 }
 
 // Called when the game starts or when spawned
 void AThirdPersonMPProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void AThirdPersonMPProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AThirdPersonMPProjectile::Destroyed()
